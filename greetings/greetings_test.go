@@ -21,3 +21,12 @@ func TestHelloEmpty(t *testing.T) {
 		t.Fatalf(`Hello("") = %q, %v, want "", error`, msg, err)
 	}
 }
+
+func TestHellos(t * testing.T) {
+	names := []string{"Slash", "Axl Rose", "Duff"}
+	_, err := Hellos(names)
+	if err != nil {
+		t.Fatalf(`Something went wrong.`)
+	}
+	
+}
