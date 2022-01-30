@@ -18,6 +18,10 @@ func Hello(name string) (string, error) {
     return message, nil
 }
 
+func Hellos(names []string) (map[string]string, error) {
+    messages := make(map[string]string)
+}
+
 // init sets initial values for variables used in the function.
 func init() {
     rand.Seed(time.Now().UnixNano())
