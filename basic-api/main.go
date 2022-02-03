@@ -1,11 +1,13 @@
 package main
 
-import(
+import (
 	"database/sql"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/joho/godotenv"
+	"github.com/spf13/viper"
 	_ "github.com/lib/pq"
 )
 
@@ -18,6 +20,11 @@ func gotDotEnvVariable(key string) string {
 
 	return os.Getenv(key)
 }
+
+func set envVariables(key string) bool {
+
+}
+
 
 func main() {
 	connStr := "user=postgres password=postgres dbname=postgres host=localhost port=5432"
