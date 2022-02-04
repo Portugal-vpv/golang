@@ -8,6 +8,6 @@ import (
 
 func Router() *mux.Router {
 	router := mux.NewRouter()
-	router.HandleFunc("/api/newuser", middleware.CreateUser).Methods("DELETE", "OPTIONS")
+	router.HandleFunc("/api/newuser", middleware.CreateUser).Methods("POST", "OPTIONS")
 	return router
 }
