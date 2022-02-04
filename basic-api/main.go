@@ -4,30 +4,43 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"os"
 
-	"github.com/joho/godotenv"
-	"github.com/spf13/viper"
 	_ "github.com/lib/pq"
+	"github.com/spf13/viper"
 )
 
-func gotDotEnvVariable(key string) string {
-	err := godotenv.Load(".env")
+func getEnvVariable(key string) string {
+	viper.SetConfigFile(".env")
+	err := viper.ReadInConfig()
 
 	if err != nil {
-		log.Fatalf("Error loading .env file.")
+		log.Fatalf("Error while reading config file %s", err)
 	}
 
-	return os.Getenv(key)
+	value, ok := viper.Get(key).(string)
+
+	if !ok {
+		log.Fatalf("Error while reading key %s", key)
+	}
+
+	return value
 }
 
-func set envVariables(key string) bool {
+func getEnvVariables() map[string]string {
+	env := map[string]string{
+		"user":     getEnvVariable("user"),
+		"password": getEnvVariable("password"),
+		"dbname":   getEnvVariable("dbname"),
+		"host":     getEnvVariable("host"),
+		"port":     getEnvVariable("port"),
+	}
 
+	return env
 }
 
-
-func main() {
-	connStr := "user=postgres password=postgres dbname=postgres host=localhost port=5432"
+func connectDB() {
+	env := getEnvVariables()
+	connStr := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%s", env["user"], env["password"], env["dbname"], env["host"], env["port"])
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		panic(err)
@@ -40,4 +53,8 @@ func main() {
 	}
 
 	fmt.Printf("Successfully connected to db!")
+}
+
+func main() {
+	connectDB()
 }
