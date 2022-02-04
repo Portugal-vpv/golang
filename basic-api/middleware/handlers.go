@@ -13,7 +13,7 @@ import (
 	_ "os"
 	_ "strconv"
 
-	_ "github.com/gorila/mux"
+	_ "github.com/gorilla/mux"
 	_ "github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
