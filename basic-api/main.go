@@ -1,9 +1,11 @@
 package main
 
 import (
+	"api/api/router"
 	"database/sql"
 	"fmt"
 	"log"
+	"net/http"
 
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
@@ -56,5 +58,7 @@ func connectDB() {
 }
 
 func main() {
-	connectDB()
+	r := router.Router()
+	fmt.Println("Starting server on port 8080")
+	log.Fatal(http.ListenAndServe(":8080", r))
 }
