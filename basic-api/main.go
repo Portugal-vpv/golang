@@ -57,6 +57,7 @@ func connectDB() {
 	fmt.Printf("Successfully connected to db!")
 }
 
+// Basic endpoint call
 func main() {
 	r := router.Router()
 	fmt.Println("Starting server on port 8080")
